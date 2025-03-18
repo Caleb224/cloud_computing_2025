@@ -3,6 +3,6 @@ import { defineFunction} from "@aws-amplify/backend";
 export const postConfirmation = defineFunction({
         name: "post-confirmation",
         environment: {
-                AMPLIFY_DATA_DEFAULT_NAME: "CLOUD_COMPUTING_2025"
+                AMPLIFY_DATA_DEFAULT_NAME: "UserProfile"
         }
 })
