@@ -3,7 +3,6 @@ import { type Schema } from "../../data/resource";
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/data";
 import { getAmplifyDataClientConfig } from "@aws-amplify/backend/function/runtime";
-// @ts-expect-error env access happens on server
 import { env } from "$amplify/env/post-confirmation";
 
 const { resourceConfig, libraryOptions } = await getAmplifyDataClientConfig(
