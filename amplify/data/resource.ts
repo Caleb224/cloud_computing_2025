@@ -11,7 +11,8 @@ const schema = a.schema({
       .model({
           uuid: a.string(),
           email: a.string(),
-          profileOwner: a.string()
+          profileOwner: a.string(),
+          firstSignIn: a.boolean()
       })
       .authorization(allow => allow.ownerDefinedIn("profileOwner"))
 })

@@ -18,6 +18,7 @@ export const handler: PostConfirmationTriggerHandler = async (event) => {
         uuid: event.request.userAttributes.sub,
         email: event.request.userAttributes.email,
         profileOwner: `${event.request.userAttributes.sub}::${event.userName}`,
+        firstSignIn: true
     });
 
     return event;
