@@ -15,7 +15,6 @@ const client = generateClient<Schema>();
 
 export const handler: PostConfirmationTriggerHandler = async (event) => {
     await client.models.UserProfile.create({
-        uuid: event.request.userAttributes.sub,
         email: event.request.userAttributes.email,
         profileOwner: `${event.request.userAttributes.sub}::${event.userName}`,
         firstSignIn: true
