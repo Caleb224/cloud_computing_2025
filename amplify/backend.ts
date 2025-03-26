@@ -7,14 +7,12 @@ import {HttpLambdaIntegration} from "aws-cdk-lib/aws-apigatewayv2-integrations";
 import {CorsHttpMethod, HttpApi, HttpMethod} from "aws-cdk-lib/aws-apigatewayv2";
 import {Policy, PolicyStatement} from "aws-cdk-lib/aws-iam";
 import {Stack} from "aws-cdk-lib";
-import {apiUploadReceipt} from "./functions/apiUploadReceipt/resource";
 import {storage} from "./storage/resource";
 
 const backend = defineBackend({
   auth,
   data,
   apiScanReceipt,
-  apiUploadReceipt,
   storage
 });
 
@@ -35,10 +33,6 @@ const scanReceiptIntegration = new HttpLambdaIntegration(
     backend.apiScanReceipt.resources.lambda
 );
 
-const uploadReceiptIntegration = new HttpLambdaIntegration(
-    "uploadReceiptIntegration",
-    backend.apiUploadReceipt.resources.lambda
-)
 
 const httpAPI = new HttpApi(
     apiStack,
@@ -58,13 +52,6 @@ httpAPI.addRoutes({
     path: "/receipts",
     methods: [HttpMethod.GET],
     integration: scanReceiptIntegration,
-    authorizer: iamAuthorizer
-})
-
-httpAPI.addRoutes({
-    path: "/receipts",
-    methods: [HttpMethod.POST],
-    integration: uploadReceiptIntegration,
     authorizer: iamAuthorizer
 })
 
