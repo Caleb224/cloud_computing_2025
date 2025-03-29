@@ -1,12 +1,25 @@
-// import outputs from "@/amplify_outputs.json";
-// import {Amplify} from "aws-amplify";
-//
-// Amplify.configure(outputs);
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Separator} from "@/components/ui/separator";
 
 export default function Page() {
     return (
-        <div>
-            <h1>This is the analyze page</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-10 h-full">
+            <div className="col-span-1">
+                <Card className="min-h-min">
+                    <CardHeader>
+                        <CardTitle className="text-xl">
+                            Your Documents
+                        </CardTitle>
+                    </CardHeader>
+                    <Separator/>
+                    <CardContent>
+
+                    </CardContent>
+                </Card>
+            </div>
+            <div className="sm:col-start-2">
+                content
+            </div>
         </div>
     )
 }

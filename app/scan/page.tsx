@@ -9,21 +9,6 @@ import Image from "next/image";
 
 import {TransferProgressEvent, uploadData} from "aws-amplify/storage";
 
-export type DeductionItem = {
-    category: string
-    description: string
-    amount: number
-    confidence: number
-}
-
-export type AnalysisResult = {
-    totalAmount: number
-    date: string
-    vendor: string
-    possibleDeductions: DeductionItem[]
-    rawText: string
-}
-
 
 export default function Page() {
     const [file, setFile] = useState<File | null>(null)
@@ -84,7 +69,7 @@ export default function Page() {
         <div className="h-full w-full flex flex-col p-10">
             <Card>
                 <CardHeader>
-                    <CardDescription>Upload a picture of the receipt you wouldd like to scan</CardDescription>
+                    <CardDescription>Upload a picture of the receipt you would like to scan</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
