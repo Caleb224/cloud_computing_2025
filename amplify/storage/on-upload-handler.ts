@@ -1,31 +1,27 @@
 import type { S3Handler } from 'aws-lambda';
-import { TextractClient, StartExpenseAnalysisCommand } from "@aws-sdk/client-textract";
+import { TextractClient, AnalyzeExpenseCommand, AnalyzeExpenseCommandInput} from "@aws-sdk/client-textract";
 
-const config = {
-    region: process.env.AWS_REGION,
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-}
-
-const client = new TextractClient(config);
+const client = new TextractClient();
 
 export const handler: S3Handler = async (event) => {
-    const objectKey = event.Records.map((record) => record.s3.object.key)[0];
+    const objectKey = decodeURI(event.Records[0].s3.object.key!);
+    const bucketName = event.Records[0].s3.bucket.name!;
+    
+    console.log(JSON.stringify(event,  null, 2));
 
-    const input = {
-        DocumentLocation: {
+    const input: AnalyzeExpenseCommandInput = {
+        Document: {
             S3Object: {
-                Bucket: "cloud-computing-2025",
-                Name: objectKey.replace("%", ":")
+                Bucket: bucketName,
+                Name: objectKey
             }
-        },
-        OutputConfig: {
-            S3Bucket: "cloud-computing-2025",
-            S3Prefix: `analysis/${objectKey}`
         }
     };
 
-    const command = new StartExpenseAnalysisCommand(input);
+    const command = new AnalyzeExpenseCommand(input);
 
-    await client.send(command);
+
+    const response = await client.send(command);
+
+    console.log(JSON.stringify(response.DocumentMetadata))
 };

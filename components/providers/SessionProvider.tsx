@@ -15,13 +15,7 @@ import {redirect} from "next/navigation";
 
 const amplifyConfig = parseAmplifyConfig(outputs);
 
-Amplify.configure({
-    ...amplifyConfig,
-    API: {
-        ...amplifyConfig.API,
-        REST: outputs.custom.API
-    }
-});
+Amplify.configure(amplifyConfig);
 
 const signOutRedirect = async () => {
     await signOut();
