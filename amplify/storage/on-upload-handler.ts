@@ -16,7 +16,7 @@ export const handler: S3Handler = async (event) => {
         DocumentLocation: {
             S3Object: {
                 Bucket: "cloud-computing-2025",
-                Name: objectKey
+                Name: objectKey.replace("%", ":")
             }
         },
         OutputConfig: {
