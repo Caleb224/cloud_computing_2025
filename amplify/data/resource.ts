@@ -1,24 +1,25 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 import { postConfirmation } from "../auth/post-confirmation/resource";
 
-const generationPrompt = "Empty prompt";
+const generationPrompt = "Take the following AWS Textract Output and create a JSON object that reflects the information from the extracted receipt";
 
 const schema = a.schema({
     generateInsight: a
         .generation({
-            aiModel: a.ai.model("Llama 3.1 405B Instruct"),
-            systemPrompt: generationPrompt
+            aiModel: a.ai.model("Llama 3.1 70B Instruct"),
+            systemPrompt: generationPrompt,
+            inferenceConfiguration: {
+                temperature: 0.7,
+                topP: 1,
+                maxTokens: 2000,
+            },
         })
         .arguments({
             input: a.string()
         })
         .returns(
             a.customType({
-                items: a.customType({
-                    name: a.string(),
-                    category: a.string(),
-                    price: a.string()
-                })
+                summary: a.string().required()
             })
         ).authorization((allow) => allow.authenticated()),
     UserProfile: a
