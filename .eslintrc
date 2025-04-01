@@ -28,6 +28,7 @@
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "import/order": [
       "error",
@@ -37,7 +38,7 @@
       }
     ],
     "no-console": "warn",
-    "no-debugger": "warn"
+    "no-debugger": "warn",
   },
   "settings": {
     "react": {
