@@ -1,6 +1,5 @@
 "use client";
 
-import { ListOutputItemWithPath } from "@aws-amplify/storage/src/providers/s3/types";
 import { list } from "aws-amplify/storage";
 import { downloadData } from "aws-amplify/storage";
 import Image from "next/image";
@@ -8,8 +7,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {Skeleton} from "@/components/ui/skeleton";
-import {useAIGeneration} from "@/hooks/AIClientHooks";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useAIGeneration } from "@/hooks/AIClientHooks";
 
 /* Client side JSON parsing to avoid high lambda costs*/
 type JsonObject = { [key: string]: any };
@@ -42,9 +41,10 @@ function stripFields<T extends JsonObject>(
 }
 
 export default function Page() {
-  const [documents, setDocuments] = useState<ListOutputItemWithPath[]>([]);
+  const [documents, setDocuments] = useState<any[]>([]);
   const [previewPhoto, setPreviewPhoto] = useState<string | null>(null);
-  const [{data, isLoading}, generateInsight] = useAIGeneration("generateInsight");
+  const [{ data, isLoading }, generateInsight] =
+    useAIGeneration("generateInsight");
 
   const retrieveDocuments = async (filename: string, path: string) => {
     try {
@@ -72,11 +72,10 @@ export default function Page() {
       ]);
 
       generateInsight({
-        input: sanitizedText
-      })
+        input: sanitizedText,
+      });
 
       console.log(data);
-
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +138,7 @@ export default function Page() {
           <CardTitle className="text-xl">Analysis</CardTitle>
         </CardHeader>
         <CardContent>
-          {isLoading && (<Skeleton className="h-32 w-full"/>)}
+          {isLoading && <Skeleton className="h-32 w-full" />}
           {data && JSON.stringify(data, null, 2)}
         </CardContent>
       </Card>
