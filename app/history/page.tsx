@@ -4,9 +4,9 @@
 // Amplify.configure(outputs);
 
 export default function Page() {
-    return (
-        <div>
-            <h1>This is the history page</h1>
-        </div>
-    )
+  return (
+    <div>
+      <h1>This is the history page</h1>
+    </div>
+  );
 }

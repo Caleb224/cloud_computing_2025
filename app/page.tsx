@@ -39,9 +39,7 @@ export default function App() {
   //   getUserProfile();
   // }, []);
 
-  return (
-      <h1>Hello</h1>
-  )
+  return <h1>Hello</h1>;
 
   // return (
   //   <div className="h-full w-full p-10">
